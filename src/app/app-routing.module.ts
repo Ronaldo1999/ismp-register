@@ -1,35 +1,52 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './main/main.component';
-import { LoginActivateGuard } from './services/login-activate.guard';
-import { AccueilComponent } from './components/accueil/accueil.component';
-import { QuestionProtocoleComponent } from './components/question-protocole/question-protocole.component';
+import { AccueilComponent } from './accueil/accueil.component';
 import { LoginComponent } from './login/login.component';
+import { LoginActivateGuard } from './services/login-activate.guard';
+import { ExamenComponent } from './components/examen/examen.component';
+import { AnnonimatComponent } from './components/annonimat/annonimat.component';
+import { AssiduiteComponent } from './components/assiduite/assiduite.component';
+import { DevoirComponent } from './components/devoir/devoir.component';
 import { NotationComponent } from './components/notation/notation.component';
-import { ElementcrutialComponent } from './components/elementcrutial/elementcrutial.component';
-import { DomaineComponent } from './components/domaine/domaine.component';
-import { JustificatifComponent } from './components/justificatif/justificatif.component';
-import { ReferenceoaciComponent } from './components/referenceoaci/referenceoaci.component';
-import { EvaluationComponent } from './components/evaluation/evaluation.component';
+import { NoteanonymeComponent } from './components/noteanonyme/noteanonyme.component';
+import { NoteSyntheseComponent } from './components/notesynthese/notesynthese.component';
+import { NotevalidationComponent } from './components/notevalidation/notevalidation.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
+import { SessionComponent } from './components/session/session.component';
+import { SessioncoursComponent } from './components/sessioncours/sessioncours.component';
+import { SoutenanceComponent } from './components/soutenance/soutenance.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+
+
 
 const routes: Routes = [
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'resetpassword', component: ResetpasswordComponent },
+
   {
-    path: 'home', component: MainComponent,
+    path: 'accueil', component: AccueilComponent,
+    canActivate: [LoginActivateGuard],
     children: [
-      { path: '', component: AccueilComponent },
-      { path: 'accueil', component: AccueilComponent },
-      { path: 'notation', component: NotationComponent },
-      { path: 'ec', component: ElementcrutialComponent },
-      { path: 'domaine', component: DomaineComponent },
-      { path: 'pq', component: QuestionProtocoleComponent },
-      { path: 'just', component: JustificatifComponent },
-      { path: 'ref', component: ReferenceoaciComponent },
-      { path: 'eva', component: EvaluationComponent }
+      { path: '', component: WelcomeComponent },
+      { path: 'assiduite', component: AssiduiteComponent },
+      { path: 'notation-anonymes', component: NoteanonymeComponent },
+      { path: 'anonymes', component: AnnonimatComponent },
+      { path: 'soutenances', component: SoutenanceComponent },
+      { path: 'devoirs', component: DevoirComponent },
+      { path: 'sessions', component: SessionComponent },
+      { path: 'sessionscours', component: SessioncoursComponent },
+      { path: 'notation-individuelles', component: NotationComponent },
+      { path: 'notation-synthese', component: NoteSyntheseComponent },
+      { path: 'notation-validation', component: NotevalidationComponent },
+      { path: 'moncompte', component: ProfileComponent },
+      { path: 'examen', component: ExamenComponent },
     ]
   },
+
+
 
 ];
 

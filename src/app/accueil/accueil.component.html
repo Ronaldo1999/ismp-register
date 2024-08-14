@@ -1,0 +1,124 @@
+<p-menu #menuAccount [model]="accounts" [popup]="true"></p-menu>
+<p-menu #menuLang [model]="stateOptions" [popup]="true"></p-menu>
+<p-menu #menuSession [model]="sessions" [popup]="true"></p-menu>
+<p-menu #menuNote [model]="notes" [popup]="true">
+    <ng-template pTemplate="item" let-item>
+        <a class="nav-link" [ngClass]="status == item.label ? 'activef' : ' '">
+            <i [class]="item.icon" [ngClass]="status == item.label ? 'icone2' : 'icone'"></i> &nbsp;
+            <span [ngClass]="status == item.label ? 'icone2' : 'icone'">{{ item.label | translate }}</span>
+        </a>
+    </ng-template>
+</p-menu>
+<div class="d-flex" id="wrapper">
+    <!-- Page content wrapper-->
+    <div id="page-content-wrapper">
+        <!-- Top navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light border-bottom ronNav fixed-top">
+            <div class="container-fluid">
+                <!-- <span id="sidebarToggle"><i>menu</i></span> -->
+                <div class="text-left">
+                    <i class="fas fa-user-circle" style="height: 40px; width: 40px; color: rgb(1, 46, 91);"></i>
+                    <span style="font-weight: 600; text-transform: uppercase">{{ user.name }}</span>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                        <li class="nav-item element" routerLink="/accueil" (click)="toggleStatus('accueil')">
+                            <a class="nav-link" [ngClass]="status == 'accueil' ? 'activef' : ' '">
+                                <i class="fa fa-home" [ngClass]="status == 'accueil' ? 'icone2' : 'icone'"></i> &nbsp;
+                                <span [ngClass]="status == 'accueil' ? 'icone2' : 'icone'">{{
+                                    "Accueil" | translate }}</span>
+                            </a>
+                        </li>&nbsp;
+
+                        <li class="nav-item element" routerLink="anonymes" (click)="toggleStatus('anonymes')">
+                            <a class="nav-link" [ngClass]="status == 'anonymes' ? 'activef' : ' '">
+                                <i class="fa fa-copy" [ngClass]="status == 'anonymes' ? 'icone2' : 'icone'"></i>
+                                &nbsp;
+                                <span [ngClass]="status == 'anonymes' ? 'icone2' : 'icone'">{{
+                                    "Anomimats" | translate }}</span>&nbsp;
+                            </a>
+                        </li>&nbsp;
+                        <li class="nav-item element" routerLink="notation-synthese"
+                            (click)="toggleStatus('notation-synthese')">
+                            <a class="nav-link" [ngClass]="status == 'notation-synthese' ? 'activef' : ' '">
+                                <i class="pi pi-caret-right"
+                                    [ngClass]="status == 'notation-synthese' ? 'icone2' : 'icone'"></i>
+                                &nbsp;
+                                <span [ngClass]="status == 'notation-synthese' ? 'icone2' : 'icone'">{{
+                                    "notation-synthese" | translate }}</span>&nbsp;
+                            </a>
+                        </li>&nbsp;
+                        <li class="nav-item element" routerLink="sessionscours" (click)="toggleStatus('sessionscours')">
+                            <a class="nav-link" [ngClass]="status == 'sessionscours' ? 'activef' : ' '">
+                                <i class="fas fa-window-restore"
+                                    [ngClass]="status == 'sessionscours' ? 'icone2' : 'icone'"></i>
+                                &nbsp;
+                                <span [ngClass]="status == 'sessionscours' ? 'icone2' : 'icone'">{{
+                                    "sessionscours" | translate }}</span>
+                            </a>
+                        </li>&nbsp;
+                        <li class="nav-item element" routerLink="examen" (click)="toggleStatus('examen')">
+                            <a class="nav-link" [ngClass]="status == 'examen' ? 'activef' : ' '">
+                                <i class="fas fa-window-restore"
+                                    [ngClass]="status == 'examen' ? 'icone2' : 'icone'"></i>
+                                &nbsp;
+                                <span [ngClass]="status == 'examen' ? 'icone2' : 'icone'">{{
+                                    "progexamen" | translate }}</span>
+                            </a>
+                        </li>&nbsp;
+
+                        <li class="nav-item element" (click)="menuLang.toggle($event)">
+                            <a class="nav-link" style="color: black;">
+                                <i class="fas fa-language"></i>&nbsp;
+                                <span>{{ 'langue' | translate }}</span>&nbsp;
+                                <i class="fas fa-caret-down"></i>
+                            </a>
+                        </li>&nbsp;
+
+                        <li class="nav-item element" (click)="menuAccount.toggle($event);toggleStatus('accaount')">
+                            <a class="nav-link" [ngClass]="status == 'accaount' ? 'activef' : ' '">
+                                <i class="fas fa-user-circle" [ngClass]="status == 'accaount' ? 'icone2' : 'icone'"></i>
+                                &nbsp;
+                                <span [ngClass]="status == 'accaount' ? 'icone2' : 'icone'">{{
+                                    "accaount" | translate }}</span>&nbsp;
+                                <i class="fas fa-caret-down" [ngClass]="status == 'accaount' ? 'icone2' : 'icone'"></i>
+                            </a>
+                        </li>&nbsp;
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page content-->
+        <div style="margin-top: 2.5%; padding: 3%">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+<!-- logout -->
+<p-dialog header="Deconnexion" [modal]="true" [(visible)]="logoutDialog" [style]="{ width: '25vw' }" [modal]="true"
+    [closable]="false" [draggable]="true" [resizable]="true">
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <img src="assets/icons/deconnexion.png" style="height: 70px; width:70px;"
+                    class="img-responsive mon-icon" />&nbsp;<h4 class="text-center text-danger"
+                    style="font-size: 20px; font-weight: 700; color: red">{{ "deconnecteQuest" | translate }}</h4>
+            </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <div class="row justify-content-center">
+            <button (click)="close()" [style]="{ height: '35px' }" pButton pRipple type="button"
+                label="{{ 'Non' | translate }}" icon="pi pi-times" iconPos="left"
+                class="p-button-secondary"></button>&nbsp;&nbsp;
+            <button (click)="logout()" [style]="{ height: '35px' }" pButton pRipple type="button"
+                label="{{ 'Oui' | translate }}" icon="pi pi-sign-out" iconPos="right" class="p-button-danger"></button>
+        </div>
+    </ng-template>
+</p-dialog>
